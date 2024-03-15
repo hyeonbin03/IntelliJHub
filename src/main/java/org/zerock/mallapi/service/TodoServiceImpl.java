@@ -70,14 +70,14 @@ private final TodoRepository todoRepository;
         //Todo List => TodoDTO LIst
         List<TodoDTO> dtoList = result
                 .get()
-                .map(todo -> entityToDTO(todo)).collect(Collectors.toList());
+                .map(this::entityToDTO).collect(Collectors.toList());
 
 
         PageResponseDTO<TodoDTO> responseDTO =
                 PageResponseDTO.<TodoDTO>withAll()
                         .dtoList(dtoList)
                         .pageRequestDTO(pageRequestDTO)
-                        .total(result.getTotalElements())
+                        .totalCount(result.getTotalElements())
                         .build();
 
         return responseDTO;

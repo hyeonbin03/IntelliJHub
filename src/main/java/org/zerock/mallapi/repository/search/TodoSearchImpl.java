@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import org.zerock.mallapi.domain.QTodo;
 import org.zerock.mallapi.domain.Todo;
 import org.zerock.mallapi.dto.PageRequestDTO;
-
+import org.zerock.mallapi.repository.ProductRepository;
 import java.util.List;
 
 @Log4j2

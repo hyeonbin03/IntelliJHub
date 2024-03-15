@@ -41,23 +41,22 @@ public class CustomFileUtil {
     }
     public List<String> saveFiles(List<MultipartFile> files) throws RuntimeException{
 
-        if(files == null || files.size() == 0){
+        if(files == null || files.isEmpty()){
             return null;
         }
 
         List<String> uploadNames = new ArrayList<>();
 
+        for(MultipartFile multipartFilefile: files){
 
-        for(MultipartFile file: files){
-
-            String savedName = UUID.randomUUID().toString()+"_"+file.getOriginalFilename();
+            String savedName = UUID.randomUUID().toString()+"_"+multipartFilefile.getOriginalFilename();
 
             Path savePath = Paths.get(uploadPath, savedName);
 
             try {
-                Files.copy(file.getInputStream(),savePath);//원본 파일 업로드
+                Files.copy(multipartFilefile.getInputStream(),savePath);//원본 파일 업로드
 
-                String contentType = file.getContentType(); //mime type
+                String contentType = multipartFilefile.getContentType(); //mime type
 
                 //이미지 파일이라면 -> 썸네일의 대상
                 if(contentType != null || contentType.startsWith("image")){
@@ -72,7 +71,7 @@ public class CustomFileUtil {
 
 
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new RuntimeException(e.getMessage());
             }
 
         }//end for
@@ -85,7 +84,7 @@ public class CustomFileUtil {
 
         Resource resource = new FileSystemResource(uploadPath+File.separator+fileName);
 
-        if(!resource.isReadable()) {
+        if(!resource.exists()) {
             resource = new FileSystemResource(uploadPath+File.separator+"default.jpg");
         }
 

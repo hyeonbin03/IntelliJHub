@@ -27,11 +27,8 @@ public class ProductDTO {
     private boolean delFlag;
 
     @Builder.Default
-    private List<MultipartFile> files = new ArrayList<>();
+    private List<MultipartFile> files = new ArrayList<>(); //등록이나 수정처럼 브라우저에서 보내주는 진짜 파일 데이터
     @Builder.Default
-    private List<String> uploadedFileNames = new ArrayList<>();
+    private List<String> uploadFileNames = new ArrayList<>(); //DB에 저장되는 파일 데이터
 
-
-    public void setUploadFileNames(List<String> uploadFileNames) {
-    }
 }
