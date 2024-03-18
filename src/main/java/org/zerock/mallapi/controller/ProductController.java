@@ -62,6 +62,14 @@ public class ProductController {
 
         Long pno = productService.register(productDTO);
 
+
+        //Addcomponent의 modal 창
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
         return Map.of("RESULT" ,pno);
 
     }
