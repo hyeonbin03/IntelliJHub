@@ -65,12 +65,14 @@ public class ProductController {
 
         //Addcomponent의 modal 창
         try {
-            Thread.sleep(5000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
 
-        return Map.of("RESULT" ,pno);
+        //RESULT로 되어 있었습니다.
+        return Map.of("result" ,pno);
+
 
     }
 
