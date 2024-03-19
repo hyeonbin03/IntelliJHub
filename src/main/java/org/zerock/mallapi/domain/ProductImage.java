@@ -15,7 +15,7 @@ public class ProductImage {
 
     private int ord;
 
-    public void setOrd(int ord) {
+    public void setOrd(int ord){
         this.ord = ord;
     }
 

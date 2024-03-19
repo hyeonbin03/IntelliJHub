@@ -40,10 +40,12 @@ public class ProductServiceImpl implements ProductService{
         List<ProductDTO> dtoList = result.get().map(arr -> {
 
 
+            ProductDTO productDTO = null;
+
             Product product = (Product) arr[0];
             ProductImage productImage = (ProductImage) arr[1];
 
-            ProductDTO productDTO = ProductDTO.builder()
+             productDTO = ProductDTO.builder()
                     .pno(product.getPno())
                     .pname(product.getPname())
                     .pdesc(product.getPdesc())
@@ -70,21 +72,19 @@ public class ProductServiceImpl implements ProductService{
 
         Product product = dtoToEntity(productDTO);
 
-        Product result = productRepository.save(product);
+         Long pno  = productRepository.save(product).getPno();
 
-        return result.getPno();
+        return pno;
     }
 
     @Override
     public ProductDTO get(Long pno) {
 
-        java.util.Optional<Product> result = productRepository.selectOne(pno);
+        Optional<Product> result = productRepository.findById(pno);
 
         Product product = result.orElseThrow();
 
-        ProductDTO productDTO = entityToDTO(product);
-
-        return productDTO;
+        return entityToDTO(product);
 
     }
 

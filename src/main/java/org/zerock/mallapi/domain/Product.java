@@ -1,6 +1,5 @@
 package org.zerock.mallapi.domain;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,13 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter
 @Table(name = "tbl_product")
+@Getter
+@ToString(exclude = "imageList")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "imageList")
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pno;
@@ -27,12 +27,17 @@ public class Product {
 
     private boolean delFlag;
 
+
+    public void changeDel(boolean delFlag) {
+        this.delFlag = delFlag;
+    }
+
+
     @ElementCollection
     @Builder.Default
     private List<ProductImage> imageList = new ArrayList<>();
 
-
-    public void changePrice(int price){
+    public void changePrice(int price) {
         this.price = price;
     }
 
@@ -44,16 +49,10 @@ public class Product {
         this.pname = name;
     }
 
+    public void addImage(ProductImage image) {
 
-    public void changeDel(boolean delFlag){
-        this.delFlag = delFlag;
-    }
-
-    public void addImage(ProductImage image){
-
-        image.setOrd(imageList.size());
+        image.setOrd(this.imageList.size());
         imageList.add(image);
-
     }
 
     public void addImageString(String fileName){
@@ -61,14 +60,11 @@ public class Product {
         ProductImage productImage = ProductImage.builder()
                 .fileName(fileName)
                 .build();
-
         addImage(productImage);
+
     }
 
-    public void clearList(){
+    public void clearList() {
         this.imageList.clear();
     }
-
-
 }
-

@@ -44,7 +44,7 @@ dependencies {
 
     implementation "com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta"
     implementation 'net.coobird:thumbnailator:0.4.19'
-
+    implementation 'org.springframework.boot:spring-boot-starter-security'
 
 
     annotationProcessor(

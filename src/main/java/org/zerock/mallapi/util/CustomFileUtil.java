@@ -47,16 +47,16 @@ public class CustomFileUtil {
 
         List<String> uploadNames = new ArrayList<>();
 
-        for(MultipartFile multipartFilefile: files){
+        for(MultipartFile file: files){
 
-            String savedName = UUID.randomUUID().toString()+"_"+multipartFilefile.getOriginalFilename();
+            String savedName = UUID.randomUUID().toString()+"_"+file.getOriginalFilename();
 
             Path savePath = Paths.get(uploadPath, savedName);
 
             try {
-                Files.copy(multipartFilefile.getInputStream(),savePath);//원본 파일 업로드
+                Files.copy(file.getInputStream(),savePath);//원본 파일 업로드
 
-                String contentType = multipartFilefile.getContentType(); //mime type
+                String contentType = file.getContentType(); //mime type
 
                 //이미지 파일이라면 -> 썸네일의 대상
                 if(contentType != null || contentType.startsWith("image")){
@@ -84,8 +84,8 @@ public class CustomFileUtil {
 
         Resource resource = new FileSystemResource(uploadPath+File.separator+fileName);
 
-        if(!resource.exists()) {
-            resource = new FileSystemResource(uploadPath+File.separator+"default.jpg");
+        if(!resource.isReadable()) {
+            resource = new FileSystemResource(uploadPath+File.separator+"default.png");
         }
 
         HttpHeaders headers = new HttpHeaders();

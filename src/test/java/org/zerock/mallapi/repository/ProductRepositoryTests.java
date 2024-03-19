@@ -83,16 +83,16 @@ public class ProductRepositoryTests {
     @Test
     public void testUpdate() {
 
-        Long pno = 10L;
+        Long pno = 63L;
         Product product = productRepository.selectOne(pno).get();
-        product.changeName("10번 상품");
-        product.changeDesc("10번 상품 설명입니다.");
-        product.changePrice(5000);
+        product.changeName("63번 상품");
+        product.changeDesc("63번 상품 설명입니다.");
+        product.changePrice(10101);
 
         product.clearList();
-        product.addImageString(UUID.randomUUID()+"_"+"PIMAGE1.jpg");
-        product.addImageString(UUID.randomUUID()+"_"+"PIMAGE2.jpg");
-        product.addImageString(UUID.randomUUID()+"_"+"PIMAGE3.jpg");
+        product.addImageString(UUID.randomUUID()+"_"+"default.png");
+        product.addImageString(UUID.randomUUID()+"_"+"default.png");
+        product.addImageString(UUID.randomUUID()+"_"+"default.png");
         productRepository.save(product);
 
     }
