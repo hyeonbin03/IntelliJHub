@@ -1,20 +1,16 @@
 package org.zerock.mallapi.domain;
 
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@ToString(exclude = "memberRoleList")
+@ToString (exclude = "memberRoleList")
 public class Member {
 
     @Id
@@ -30,17 +26,16 @@ public class Member {
     @Builder.Default
     private List<MemberRole> memberRoleList = new ArrayList<>();
 
-    public void addRole (MemberRole memberRole){
+    public void addRole(MemberRole memberRole){
 
         memberRoleList.add(memberRole);
-
     }
 
     public void clearRole(){
         memberRoleList.clear();
     }
 
-    public void changNickname(String nickname){
+    public void changeNickname(String nickname) {
         this.nickname = nickname;
     }
 
@@ -48,9 +43,8 @@ public class Member {
         this.pw = pw;
     }
 
-    public void changeSocial(boolean social){
+    public void changeSocial(boolean social) {
         this.social = social;
     }
-
 
 }
